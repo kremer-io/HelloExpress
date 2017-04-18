@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:6.10.2
 
 # Prepare non-root user and folders
 RUN useradd --system --user-group --create-home app && \
@@ -10,8 +10,11 @@ COPY package.json /opt/
 RUN cd /opt && npm install
 ENV NODE_PATH=/opt/node_modules
 
-VOLUME ["/app"]
+# Install project
+COPY . /app
+
 USER app
 WORKDIR /app
+
 EXPOSE 3000
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["npm", "start"]

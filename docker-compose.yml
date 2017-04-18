@@ -6,4 +6,5 @@ services:
       - .:/app
     ports:
       - 3000:3000
-    entrypoint: nodemon -L app.js
+      - 5858:5858
+    command: nodemon --debug=5858 app.js
